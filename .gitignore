@@ -38,3 +38,6 @@ app.*.map.json
 
 # local coordination state (not part of the app)
 .coord/
+
+# Local Claude Code settings (machine-local; keeps agent-bus paths out of the public repo)
+.claude/
