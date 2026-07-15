@@ -6,14 +6,17 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:hi_planner/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    // Build our app and trigger a frame. Wrap in ProviderScope to mirror the
+    // real boot path (main() runs `ProviderScope(child: MyApp())`), so the test
+    // exercises the actual widget tree and stays valid once MyApp reads providers.
+    await tester.pumpWidget(const ProviderScope(child: MyApp()));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

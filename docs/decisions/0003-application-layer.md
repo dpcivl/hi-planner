@@ -19,6 +19,12 @@
 > the provider's `onDispose`) and ordered safely (LIFO: container disposed before
 > the connection closes). One optional nit noted (test db built before the
 > container → harmless leak only if the ctor ever throws); left as-is.
+>
+> **`/code-review` (high) follow-up:** no blocking bugs; 3 LOW observations.
+> #1 APPLIED — `test/widget_test.dart` now wraps `MyApp` in `ProviderScope` to
+> mirror `main()`'s boot path. #2 (`onDispose(db.close)` fire-and-forget) and
+> #3 (unguarded provider read in pure-VM context) accepted as documented
+> trade-offs.
 
 > SCOPE OF THIS INCREMENT = **dependency-injection wiring only.** It binds the
 > already-built data-layer implementations to the domain interfaces through
